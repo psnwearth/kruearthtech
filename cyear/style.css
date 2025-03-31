@@ -1,0 +1,213 @@
+body {
+    font-family: 'Prompt', sans-serif;
+    background: linear-gradient(to bottom right, #111, #333);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.card-container {
+    perspective: 1000px;
+}
+
+.card {
+    width: 350px;
+    height: 500px;
+    background: linear-gradient(to bottom, #c00, #900);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    position: relative; /* เพิ่ม position relative */
+    overflow: hidden; /* ป้องกันลวดลายเกินขอบ */
+}
+
+.card:hover {
+    transform: rotateY(5deg) rotateX(-5deg) scale(1.05);
+}
+
+/* ลวดลายพื้นหลัง */
+.card::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 450px;
+    height: 450px;
+    background-image: url("pattern.png"); /* ใส่รูป pattern ที่นี่ */
+    background-size: cover;
+    opacity: 0.2;
+    transform: rotate(-15deg);
+    z-index: 0; /* อยู่ด้านหลังเนื้อหา */
+}
+
+/* ลวดลายขอบ */
+.card::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 3px solid #ffd700; /* ขอบสีทอง */
+    border-radius: 5px;
+    z-index: 1; /* อยู่เหนือลวดลายพื้นหลัง */
+    pointer-events: none; /* ไม่ให้บังการคลิก */
+}
+
+/* Container สำหรับรูปภาพ */
+.image-container {
+    position: absolute;
+    top: 20px; /* ปรับระยะห่างจากด้านบน */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2; /* ให้อยู่เหนือพื้นหลัง */
+}
+
+/* สไตล์รูปภาพและ animation */
+.image-container img {
+    display: block;
+    margin: 0 auto;
+    animation: zoom 10s linear infinite alternate; /* เปลี่ยนเป็น animation zoom */
+}
+
+@keyframes zoom {
+    0% { transform: scale(1); } /* ขนาดปกติ */
+    50% { transform: scale(1.1); } /* ซูมเข้า 10% */
+    100% { transform: scale(1); } /* กลับสู่ขนาดปกติ */
+}
+
+
+/* สไตล์โคมไฟ */
+.lanterns {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    z-index: 2;
+}
+
+.lantern1 {
+    width: 30px;
+    height: 40px;
+    background-color: #ffd700;
+    border-radius: 50%/20%;
+    margin: 0 10px;
+    position: sticky;
+    animation: swing 3s linear infinite alternate;
+    
+}
+
+.lantern2 {
+    width: 30px;
+    height: 40px;
+    background-color: #f7eaab;
+    border-radius: 50%/20%;
+    margin: 0 10px;
+    position: relative;
+    animation: swing 4s linear infinite alternate;
+
+} 
+.lantern3 {
+    width: 30px;
+    height: 40px;
+    background-color: #ffd700;
+    border-radius: 50%/20%;
+    margin: 0 10px;
+    position: sticky;
+    animation: swing 3s linear infinite alternate;
+
+} 
+.lantern4 {
+    width: 30px;
+    height: 40px;
+    background-color: #f7eaab;
+    border-radius: 50%/20%;
+    margin: 0 10px;
+    position: relative;
+    animation: swing 4s linear infinite alternate;
+
+} 
+
+.lantern::before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: #8B0000;
+    border-radius: 50%;
+}
+@keyframes swing {
+    0%{
+        transform: rotate(-10deg);
+    }
+    100%{
+        transform: rotate(10deg);
+    }
+}
+
+/* ... (สไตล์โคมไฟแต่ละดวง) */
+.greeting {
+    position: absolute;
+    top: 60%; /* ปรับตำแหน่งลงมา */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.greeting h1 {
+    font-size: 2em;
+    /* แก้ไขระยะห่างระหว่างบรรทัดโดยใช้ line-height */
+    line-height: 1.2; /* ค่าปกติคือ 1 หรือ normal ลองปรับค่าน้อยกว่านี้ เช่น 1.1, 1.0 หรือ 0.9 */
+    margin-bottom: 5px; /* ลดระยะห่างด้านล่าง */
+    color: #ffd700;
+}
+
+.greeting h2 {
+    font-size: 1.5em; /* ปรับขนาด h2 เล็กลงเล็กน้อยเพื่อให้สมดุล */
+    /* แก้ไขระยะห่างระหว่างบรรทัดโดยใช้ line-height */
+    line-height: 1; /* ค่าปกติคือ 1 หรือ normal ลองปรับค่าน้อยกว่านี้ เช่น 0.9 หรือ 0.8 */
+    margin-bottom: 5px; /* ลดระยะห่างด้านล่าง */
+    color: #f7de51;
+}
+
+.blessing {
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    h1 {
+        font-size: 20px;
+    }
+
+}
+
+/* การปรับขนาดสำหรับแท็บเล็ต */
+@media (min-width: 601px) and (max-width: 1524px) {
+    h1 {
+        font-size: 22px;
+    }
+}
+
+/* การปรับขนาดสำหรับหน้าจอใหญ่ (Desktop) */
+@media (min-width: 1825px) {
+    .container {
+        max-width: 700px;
+    }
+}
